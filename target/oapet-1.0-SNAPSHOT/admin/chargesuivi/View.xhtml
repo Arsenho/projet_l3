@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargesuiviViewDlg" widgetVar="ChargesuiviViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewChargesuiviTitle}">
+            <h:form id="ChargesuiviViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargesuiviController.selected != null}">
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_idChargeSuivi}"/>
+                        <h:outputText value="#{chargesuiviController.selected.idChargeSuivi}" title="#{bundle.ViewChargesuiviTitle_idChargeSuivi}"/>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_nature}"/>
+                        <h:outputText value="#{chargesuiviController.selected.nature}" title="#{bundle.ViewChargesuiviTitle_nature}"/>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_dateAjout}"/>
+                        <h:outputText value="#{chargesuiviController.selected.dateAjout}" title="#{bundle.ViewChargesuiviTitle_dateAjout}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_dateModification}"/>
+                        <h:outputText value="#{chargesuiviController.selected.dateModification}" title="#{bundle.ViewChargesuiviTitle_dateModification}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_idChargeProduction}"/>
+                        <h:outputText value="#{chargesuiviController.selected.idChargeProduction}" title="#{bundle.ViewChargesuiviTitle_idChargeProduction}"/>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_idChargeProductionPeutEtreM}"/>
+                        <h:outputText value="#{chargesuiviController.selected.idChargeProductionPeutEtreM}" title="#{bundle.ViewChargesuiviTitle_idChargeProductionPeutEtreM}"/>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_idFiliere}"/>
+                        <h:outputText value="#{chargesuiviController.selected.idFiliere}" title="#{bundle.ViewChargesuiviTitle_idFiliere}"/>
+                        <h:outputText value="#{bundle.ViewChargesuiviLabel_email}"/>
+                        <h:outputText value="#{chargesuiviController.selected.email}" title="#{bundle.ViewChargesuiviTitle_email}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ChargesuiviViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

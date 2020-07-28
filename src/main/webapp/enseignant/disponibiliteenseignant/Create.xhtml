@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisponibiliteenseignantCreateDlg" widgetVar="DisponibiliteenseignantCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDisponibiliteenseignantTitle}">
+            <h:form id="DisponibiliteenseignantCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disponibiliteenseignantController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_jour}" for="jour" />
+                        <p:calendar id="jour" pattern="MM/dd/yyyy" value="#{disponibiliteenseignantController.selected.jour}" title="#{bundle.EditDisponibiliteenseignantTitle_jour}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_jour}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_heureDebut}" for="heureDebut" />
+                        <p:calendar id="heureDebut" pattern="HH:mm:ss" value="#{disponibiliteenseignantController.selected.heureDebut}" title="#{bundle.EditDisponibiliteenseignantTitle_heureDebut}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_heureDebut}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_heureFin}" for="heureFin" />
+                        <p:calendar id="heureFin" pattern="HH:mm:ss" value="#{disponibiliteenseignantController.selected.heureFin}" title="#{bundle.EditDisponibiliteenseignantTitle_heureFin}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_heureFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_codeCours}" for="codeCours" />
+                        <p:selectOneMenu id="codeCours" value="#{disponibiliteenseignantController.selected.codeCours}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_codeCours}" converter="coursConverter">
+                            <f:selectItems value="#{coursController.itemsAvailableSelectOne}"
+                                           var="codeCoursItem"
+                                           itemValue="#{codeCoursItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_idEmploiTemps}" for="idEmploiTemps" />
+                        <p:selectOneMenu id="idEmploiTemps" value="#{disponibiliteenseignantController.selected.idEmploiTemps}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_idEmploiTemps}" converter="emploitempsConverter">
+                            <f:selectItems value="#{emploitempsController.itemsAvailableSelectOne}"
+                                           var="idEmploiTempsItem"
+                                           itemValue="#{idEmploiTempsItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDisponibiliteenseignantLabel_idEnseignant}" for="idEnseignant" />
+                        <p:selectOneMenu id="idEnseignant" value="#{disponibiliteenseignantController.selected.idEnseignant}" required="true" requiredMessage="#{bundle.EditDisponibiliteenseignantRequiredMessage_idEnseignant}" converter="enseignantConverter" >
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="idEnseignantItem"
+                                           itemValue="#{idEnseignantItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{disponibiliteenseignantController.create}" value="#{bundle.Save}" update="display,:DisponibiliteenseignantListForm:datalist,:growl" oncomplete="handleSubmit(args,'DisponibiliteenseignantCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DisponibiliteenseignantCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

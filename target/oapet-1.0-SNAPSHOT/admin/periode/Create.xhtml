@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodeCreateDlg" widgetVar="PeriodeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePeriodeTitle}">
+            <h:form id="PeriodeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{periodeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_idPeriode}" for="idPeriode" />
+                        <p:inputText id="idPeriode" value="#{periodeController.selected.idPeriode}" title="#{bundle.CreatePeriodeTitle_idPeriode}" required="true" requiredMessage="#{bundle.CreatePeriodeRequiredMessage_idPeriode}"/>
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_heureDebut}" for="heureDebut" />
+                        <p:calendar id="heureDebut" pattern="HH:mm:ss" value="#{periodeController.selected.heureDebut}" title="#{bundle.EditPeriodeTitle_heureDebut}" required="true" requiredMessage="#{bundle.EditPeriodeRequiredMessage_heureDebut}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_heureFin}" for="heureFin" />
+                        <p:calendar id="heureFin" pattern="HH:mm:ss" value="#{periodeController.selected.heureFin}" title="#{bundle.EditPeriodeTitle_heureFin}" required="true" requiredMessage="#{bundle.EditPeriodeRequiredMessage_heureFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_typeCours}" for="typeCours" />
+                        <p:inputText id="typeCours" value="#{periodeController.selected.typeCours}" title="#{bundle.CreatePeriodeTitle_typeCours}" required="true" requiredMessage="#{bundle.CreatePeriodeRequiredMessage_typeCours}"/>
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_effectivite}" for="effectivite" />
+                        <p:selectBooleanCheckbox id="effectivite" value="#{periodeController.selected.effectivite}" />
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_codeCours}" for="codeCours" />
+                        <p:selectOneMenu id="codeCours" value="#{periodeController.selected.codeCours}" required="true" requiredMessage="#{bundle.EditPeriodeRequiredMessage_codeCours}" converter="coursConverter">
+                            <f:selectItems value="#{coursController.itemsAvailableSelectOne}"
+                                           var="codeCoursItem"
+                                           itemValue="#{codeCoursItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePeriodeLabel_idEmploiTemps}" for="idEmploiTemps" />
+                        <p:selectOneMenu id="idEmploiTemps" value="#{periodeController.selected.idEmploiTemps}" required="true" requiredMessage="#{bundle.EditPeriodeRequiredMessage_idEmploiTemps}" converter="emploitempsConverter">
+                            <f:selectItems value="#{emploitempsController.itemsAvailableSelectOne}"
+                                           var="idEmploiTempsItem"
+                                           itemValue="#{idEmploiTempsItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{periodeController.create}" value="#{bundle.Save}" update="display,:PeriodeListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeriodeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeriodeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

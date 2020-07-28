@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EnseignantEditDlg" widgetVar="EnseignantEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEnseignantTitle}">
+            <h:form id="EnseignantEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{enseignantController.selected != null}">
+                       
+                        <p:outputLabel value="#{bundle.EditEnseignantLabel_dateAjout}" for="dateAjout" />
+                        <p:calendar id="dateAjout" pattern="MM/dd/yyyy HH:mm:ss" value="#{enseignantController.selected.dateAjout}" title="#{bundle.EditEnseignantTitle_dateAjout}"  showOn="button"/>
+
+                        <p:outputLabel value="#{bundle.EditEnseignantLabel_idChargeProductionModifier}" for="idChargeProductionModifier" />
+                        <p:selectOneMenu id="idChargeProductionModifier" value="#{enseignantController.selected.idChargeProductionModifier}" required="true" requiredMessage="#{bundle.EditEnseignantRequiredMessage_idChargeProductionModifier}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionModifierItem"
+                                           itemValue="#{idChargeProductionModifierItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEnseignantLabel_email}" for="email" />
+                        <p:selectOneMenu id="email" value="#{enseignantController.selected.email}" required="true" requiredMessage="#{bundle.EditEnseignantRequiredMessage_email}" converter="utilisateurConverter">
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="emailItem"
+                                           itemValue="#{emailItem}"
+                                           itemLabel="#{emailItem.email}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Filieres" for="filiereList" />
+                        <p:selectManyMenu id="filiereList" value="#{enseignantController.selected.filiereList}" converter="filiereConverter">
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectMany}"
+                                           var="filiereListItem"
+                                           itemValue="#{filiereListItem}"
+                                           itemLabel="#{filiereListItem.instituleFiliere} #{filiereListItem.niveauFiliere}"
+                                           />
+                            
+                        </p:selectManyMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{enseignantController.update}" value="#{bundle.Save}" update="display,:EnseignantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EnseignantEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EnseignantEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

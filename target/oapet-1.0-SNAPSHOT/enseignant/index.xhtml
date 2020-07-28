@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Enseignant</title>
+        <style type="text/css">
+            .ui-menubar	{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            .ui-submenu{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            submenu {background-color: #118ea4 !important;}
+            .ajouter {
+                background-image: url('resources/img/dossier.png') !important;
+            }
+        </style>
+    </h:head>
+    <h:body style="background-image: url(resources/img/hero-bg.png)">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h:form>  
+                    <p:growl id="messages"/>
+
+                    <p:menubar styleClass="ui-menubar"  >
+                        <p:menuitem value="Accueil" url="#{request.contextPath}/faces/index.html" style="background-color: #ADD8E6 ! important"/>
+                        <p:submenu label="Historiques" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Disponibilité" url="#" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Emploi de temps" url="#" style="background-color: #ADD8E6 ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Outils" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Nouvelle Disponibilité" url="disponibiliteenseignant/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:submenu label="Tableaux de bord" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                                <p:menuitem value="Filières" url="#" style="background-color: #ADD8E6 ! important"/>
+                                <p:menuitem value="Cours" url="#" style="background-color: #ADD8E6 ! important"/>
+                            </p:submenu>
+                            <p:menuitem value="Emploi de temps récent" url="#" style="background-color: #ADD8E6 ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Editer" icon="pi pi-pencil" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Supprimer Disponibilité" url="#" icon="ui-icon-contactus" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Modifier Disponibilité" url="#" icon="pi pi-angle-double-right" style="background-color: #ADD8E6 ! important" />
+                        </p:submenu>
+
+                        <p:submenu label="Aide" icon="pi pi-question" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Documentation" url="#" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Developpeurs" url="#" style="background-color: #ADD8E6 ! important"/>
+                        </p:submenu>
+
+                        <f:facet name="options">
+                            <p:inputText style="margin:1px 4px 1px 1px;" placeholder="Rechercher..."/>
+                            <p:commandButton type="button" value="ok"  />
+                            <p:submenu label="Compte" icon="ui ui-briefcase" styleClass="submenu">
+                                <p:menuitem value="modifier" url="#" style="background-color: #ADD8E6 ! important"/>
+                                <p:menuitem value="quitter" url="#" style="background-color: #ADD8E6 ! important"/>
+                                <p:menuitem value="Chargé du suivit" url="#" style="background-color: #ADD8E6 ! important" />
+                            </p:submenu>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <h:form>     
+                <p:growl id="messages" showDetail="true" />
+
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton type="button" value="Dossier" icon="ui-icon-folder-open" />
+
+                        <p:commandButton type="button" value="Print" icon="ui-icon-print" />
+
+                        <span class="ui-separator">
+                            <span class="ui-icon pi pi-ellipsis-v" />
+                        </span>
+
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:menuButton value="Compte">
+                            <p:menuitem value="Supprimer" action="#{toolbarView.save}" update="messages" icon="pi pi-save" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="parametrer" action="#{toolbarView.update}" update="messages" icon="pi pi-refresh" style="background-color: #ADD8E6 ! important;" />
+                            <p:menuitem value="Modifier" action="#{toolbarView.delete}" ajax="false" icon="pi pi-times" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Déconnecter" action="#{logoutBean.logout}"  icon="pi pi-home" style="background-color: #ADD8E6 ! important;" />
+                        </p:menuButton>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>     
+            <i class="pi pi-check"></i>
+        </div>    
+        <div>
+            <h1>Accueil</h1>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CoursViewDlg" widgetVar="CoursViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCoursTitle}">
+            <h:form id="CoursViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{coursController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCoursLabel_codeCours}"/>
+                        <h:outputText value="#{coursController.selected.codeCours}" title="#{bundle.ViewCoursTitle_codeCours}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_instituleCours}"/>
+                        <h:outputText value="#{coursController.selected.instituleCours}" title="#{bundle.ViewCoursTitle_instituleCours}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_nbreHeureCm}"/>
+                        <h:outputText value="#{coursController.selected.nbreHeureCm}" title="#{bundle.ViewCoursTitle_nbreHeureCm}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_nbreHeureTd}"/>
+                        <h:outputText value="#{coursController.selected.nbreHeureTd}" title="#{bundle.ViewCoursTitle_nbreHeureTd}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_nbreHeureTp}"/>
+                        <h:outputText value="#{coursController.selected.nbreHeureTp}" title="#{bundle.ViewCoursTitle_nbreHeureTp}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_idChargeProduction}"/>
+                        <h:outputText value="#{coursController.selected.idChargeProduction}" title="#{bundle.ViewCoursTitle_idChargeProduction}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_idEnseignant}"/>
+                        <h:outputText value="#{coursController.selected.idEnseignant}" title="#{bundle.ViewCoursTitle_idEnseignant}"/>
+                        <h:outputText value="#{bundle.ViewCoursLabel_idFiliere}"/>
+                        <h:outputText value="#{coursController.selected.idFiliere}" title="#{bundle.ViewCoursTitle_idFiliere}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CoursViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

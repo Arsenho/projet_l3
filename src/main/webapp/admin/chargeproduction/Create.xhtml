@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargeproductionCreateDlg" widgetVar="ChargeproductionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateChargeproductionTitle}">
+            <h:form id="ChargeproductionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargeproductionController.selected != null}">
+                       
+                       
+                        
+                        <p:outputLabel value="#{bundle.CreateChargeproductionLabel_idChargeProductionAjoute}" for="idChargeProductionAjoute" />
+                        <p:selectOneMenu id="idChargeProductionAjoute" value="#{chargeproductionController.selected.idChargeProductionAjoute}" required="true" requiredMessage="#{bundle.EditChargeproductionRequiredMessage_idChargeProductionAjoute}" converter="chargeproductionConverter">
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionAjouteItem"
+                                           itemValue="#{idChargeProductionAjouteItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateChargeproductionLabel_email}" for="email" />
+                        <p:selectOneMenu id="email" value="#{chargeproductionController.selected.email}" required="true" requiredMessage="#{bundle.EditChargeproductionRequiredMessage_email}" converter="utilisateurConverter">
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="emailItem"
+                                           itemValue="#{emailItem}"
+                                           itemLabel="#{emailItem.email}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chargeproductionController.create}" value="#{bundle.Save}" update="display,:ChargeproductionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChargeproductionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChargeproductionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

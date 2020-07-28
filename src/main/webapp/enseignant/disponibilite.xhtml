@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style type="text/css">
+            .ui-menubar	{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            .ui-submenu{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            submenu {background-color: #118ea4 !important;}
+            .ajouter {
+                background-image: url('resources/img/dossier.png') !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h:form>  
+                    <p:growl id="messages"/>
+
+                    <p:menubar styleClass="ui-menubar"  >
+                        <p:menuitem value="Accueil" url="#{request.contextPath}/faces/index.html" style="background-color: #4588CF ! important"/>
+                        <p:submenu label="Historiques" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #118ea4 ! important">
+                            <p:menuitem value="Disponibilité" url="#" style="background-color: #4588CF ! important"/>
+                            <p:menuitem value="Emploi de temps" url="#" style="background-color: #4588CF ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Outils" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #118ea4 ! important">
+                            <p:menuitem value="Nouvelle Disponibilité" url="disponibilite.xhtml" style="background-color: #4588CF ! important"/>
+                            <p:submenu label="Tableaux de bord" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #118ea4 ! important">
+                                <p:menuitem value="Filières" url="#" style="background-color: #4588CF ! important"/>
+                                <p:menuitem value="Cours" url="#" style="background-color: #4588CF ! important"/>
+                            </p:submenu>
+                            <p:menuitem value="Emploi de temps récent" url="#" style="background-color: #4588CF ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Editer" icon="pi pi-pencil" styleClass="submenu" style="background-color: #4588CF ! important">
+                            <p:menuitem value="Supprimer Disponibilité" url="#" icon="ui-icon-contactus" style="background-color: #118ea4 ! important"/>
+                            <p:menuitem value="Modifier Disponibilité" url="#" icon="pi pi-angle-double-right" style="background-color: #118ea4 ! important" />
+                        </p:submenu>
+
+                        <p:submenu label="Aide" icon="pi pi-question" styleClass="submenu" style="background-color: #4588CF ! important">
+                            <p:menuitem value="Documentation" url="#" style="background-color: #118ea4 ! important"/>
+                            <p:menuitem value="Developpeurs" url="#" style="background-color: #4588CF ! important"/>
+                        </p:submenu>
+
+                        <f:facet name="options">
+                            <p:inputText style="margin:1px 4px 1px 1px;" placeholder="Rechercher..."/>
+                            <p:commandButton type="button" value="ok"  />
+                            <p:submenu label="Compte" icon="ui ui-briefcase" styleClass="submenu">
+                                <p:menuitem value="modifier" url="#" style="background-color: #118ea4 ! important"/>
+                                <p:menuitem value="quitter" url="#" style="background-color: #118ea4 ! important"/>
+                                <p:menuitem value="Chargé du suivit" url="#" style="background-color: #118ea4 ! important" />
+                            </p:submenu>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <h:form>     
+                <p:growl id="messages" showDetail="true" />
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton type="button" value="Dossier" icon="ui ui-file" />
+                        <p:commandButton type="button" value="Print" icon="ui ui-folder-open" />
+
+                        <span class="ui-separator">
+                            <span class="ui-icon pi pi-ellipsis-v" />
+                        </span>
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:menuButton value="Compte">
+                            <p:menuitem value="Supprimer" action="#{toolbarView.save}" update="messages" icon="pi pi-save" style="background-color: #118ea4 ! important"/>
+                            <p:menuitem value="parametrer" action="#{toolbarView.update}" update="messages" icon="pi pi-refresh" style="background-color: #118ea4 ! important" />
+                            <p:menuitem value="Modifier" action="#{toolbarView.delete}" ajax="false" icon="pi pi-times" style="background-color: #118ea4 ! important"/>
+                            <p:menuitem value="Déconnecter" action="#{logoutBean.logout}"  icon="pi pi-home" style="background-color: #118ea4 ! important" />
+                        </p:menuButton>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>          
+            <i class="pi pi-check"></i>
+        </div>
+        <div>
+            <h1>Nouvelle Disponibilite</h1>
+        </div>
+        <h:form>
+            <p:fieldset legend="Diponibilité">
+                
+                <h:panelGrid columns="4" cellpadding="5">
+                    
+                    <p:outputLabel for="button" value="Semaine du:"/>
+                    <p:calendar id="button" showOn="button"/>
+                
+                    <p:outputLabel for="button" value="Au:"/>
+                    <p:calendar id="button2" showOn="button"/>
+                    
+                </h:panelGrid>
+                <h:panelGrid columns="4"  cellpadding="5">
+                    
+                     <h:panelGrid columns="1"  cellpadding="5">
+                    <p:outputLabel for="button3"  value="Jour:"/>
+                   <h:panelGrid columns="1" cellpadding="5">
+                     <p:calendar id="button3" showOn="button"/>
+                     <p:calendar id="button4" showOn="button"/>
+                   </h:panelGrid>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="1"  cellpadding="5">
+                    <p:outputLabel   value="Horaire :"/>
+                    <h:panelGrid columns="2"  cellpadding="5">
+                        <p:outputLabel for="horaire1"  value="De:"/>
+                    <p:inputText id="horaire1"/>
+                     <p:outputLabel for="horaire2"  value="De:"/>
+                    <p:inputText id="horaire2"/>
+                   </h:panelGrid>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="1"  cellpadding="5">
+                    <p:outputLabel   value="Horaire :"/>
+                    <h:panelGrid columns="2"  cellpadding="5">
+                        <p:outputLabel for="horaire3"  value="A:"/>
+                    <p:inputText id="horaire3" required="true" requiredMessage=" une erreur fatale"/>
+                 
+                     <p:outputLabel for="horaire4"  value="A:"/>
+                    <p:inputText id="horaire4"/>
+                   </h:panelGrid>
+                    </h:panelGrid>
+                    
+                     <h:panelGrid columns="1"  cellpadding="5">
+                    <p:outputLabel for="button3"  value="Jour:"/>
+                   <h:panelGrid columns="1" cellpadding="5">
+                    <p:inputText id="horaire5"/>
+                    <p:inputText id="horaire6"/>
+                   </h:panelGrid>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="2" cellpadding="25">
+            <p:commandButton value="Annuler" type="reset"/>
+            <p:commandButton value="Valider" />
+             </h:panelGrid>
+                    
+                </h:panelGrid>
+            </p:fieldset>
+            
+            
+            <p:fieldset legend="Tableau de bord">
+            
+                <p:dataTable>
+                 
+                        <p:column>
+                            <f:facet name="header">Filiere</f:facet>
+                            
+                        </p:column>
+                    <p:column>
+                         <f:facet name="header">Unité de valeur</f:facet>
+                    </p:column>
+                    <p:column>
+                         <f:facet name="header">Intitulé</f:facet>
+                    </p:column>
+                    <p:column>
+                         <f:facet name="header">Cour Magistrale</f:facet>
+                    </p:column>
+                    <p:column>
+                         <f:facet name="header">TD</f:facet>
+                    </p:column>
+                    <p:column>
+                         <f:facet name="header">Status</f:facet>
+                    </p:column>
+                    
+                </p:dataTable>
+                
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>

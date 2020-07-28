@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContraintegenautoEditDlg" widgetVar="ContraintegenautoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditContraintegenautoTitle}">
+            <h:form id="ContraintegenautoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contraintegenautoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_idContainteGenAuto}" for="idContainteGenAuto" />
+                        <p:inputText id="idContainteGenAuto" value="#{contraintegenautoController.selected.idContainteGenAuto}" title="#{bundle.EditContraintegenautoTitle_idContainteGenAuto}" required="true" requiredMessage="#{bundle.EditContraintegenautoRequiredMessage_idContainteGenAuto}"/>
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_prioriteFifo}" for="prioriteFifo" />
+                        <p:selectBooleanCheckbox id="prioriteFifo" value="#{contraintegenautoController.selected.prioriteFifo}" />
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_prioriteRetardCm}" for="prioriteRetardCm" />
+                        <p:selectBooleanCheckbox id="prioriteRetardCm" value="#{contraintegenautoController.selected.prioriteRetardCm}" />
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_prioriteRetardtTd}" for="prioriteRetardtTd" />
+                        <p:selectBooleanCheckbox id="prioriteRetardtTd" value="#{contraintegenautoController.selected.prioriteRetardtTd}" />
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_prioriteRetardTp}" for="prioriteRetardTp" />
+                        <p:selectBooleanCheckbox id="prioriteRetardTp" value="#{contraintegenautoController.selected.prioriteRetardTp}" />
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_idChargeProduction}" for="idChargeProduction" />
+                        <p:selectOneMenu id="idChargeProduction" value="#{contraintegenautoController.selected.idChargeProduction}" required="true" requiredMessage="#{bundle.EditContraintegenautoRequiredMessage_idChargeProduction}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionItem"
+                                           itemValue="#{idChargeProductionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditContraintegenautoLabel_idEmploiTemps}" for="idEmploiTemps" />
+                        <p:selectOneMenu id="idEmploiTemps" value="#{contraintegenautoController.selected.idEmploiTemps}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{emploitempsController.itemsAvailableSelectOne}"
+                                           var="idEmploiTempsItem"
+                                           itemValue="#{idEmploiTempsItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contraintegenautoController.update}" value="#{bundle.Save}" update="display,:ContraintegenautoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ContraintegenautoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ContraintegenautoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

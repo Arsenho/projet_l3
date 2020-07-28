@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CoursEditDlg" widgetVar="CoursEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCoursTitle}">
+            <h:form id="CoursEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{coursController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCoursLabel_codeCours}" for="codeCours" />
+                        <p:inputText id="codeCours" value="#{coursController.selected.codeCours}" title="#{bundle.EditCoursTitle_codeCours}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_codeCours}"/>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_instituleCours}" for="instituleCours" />
+                        <p:inputText id="instituleCours" value="#{coursController.selected.instituleCours}" title="#{bundle.EditCoursTitle_instituleCours}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_instituleCours}"/>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_nbreHeureCm}" for="nbreHeureCm" />
+                        <p:inputText id="nbreHeureCm" value="#{coursController.selected.nbreHeureCm}" title="#{bundle.EditCoursTitle_nbreHeureCm}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_nbreHeureCm}"/>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_nbreHeureTd}" for="nbreHeureTd" />
+                        <p:inputText id="nbreHeureTd" value="#{coursController.selected.nbreHeureTd}" title="#{bundle.EditCoursTitle_nbreHeureTd}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_nbreHeureTd}"/>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_nbreHeureTp}" for="nbreHeureTp" />
+                        <p:inputText id="nbreHeureTp" value="#{coursController.selected.nbreHeureTp}" title="#{bundle.EditCoursTitle_nbreHeureTp}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_nbreHeureTp}"/>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_idChargeProduction}" for="idChargeProduction" />
+                        <p:selectOneMenu id="idChargeProduction" value="#{coursController.selected.idChargeProduction}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idChargeProduction}" converter="chargeproductionConverter">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionItem"
+                                           itemValue="#{idChargeProductionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_idEnseignant}" for="idEnseignant" />
+                        <p:selectOneMenu id="idEnseignant" value="#{coursController.selected.idEnseignant}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idEnseignant}" converter="enseignantConverter">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="idEnseignantItem"
+                                           itemValue="#{idEnseignantItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCoursLabel_idFiliere}" for="idFiliere" />
+                         <p:selectOneMenu id="idFiliere" value="#{coursController.selected.idFiliere}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idFiliere}" converter="filiereConverter">
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="idFiliereItem"
+                                           itemValue="#{idFiliereItem}"
+                                           itemLabel="#{idFiliereItem.instituleFiliere} #{idFiliereItem.niveauFiliere}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{coursController.update}" value="#{bundle.Save}" update="display,:CoursListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CoursEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CoursEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

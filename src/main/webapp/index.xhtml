@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Acceuil</title>
+        <meta charset="utf-8"/>
+        <!-- Favicon -->
+        <link href="resources/img/favicon.ico" rel="shortcut icon"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Raleway" rel="stylesheet"/>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/css/style.css"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            /* Make the image fully responsive */
+            .carousel-inner img {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+
+        <!-- Header section -->
+        <h:form>
+        <header class="header-section clearfix">
+            
+                <div class="container-fluid">
+                    <a href="#{request.contextPath}/faces/index.html" class="site-logo">
+                        <img src="resources/img/quote.png" alt="" />
+                    </a>
+                    <div class="responsive-bar"><i class="fa fa-bars"></i></div>
+                    <a href="" class="user"><i class="fa fa-user"></i></a>
+                    
+                    <p:commandButton class="site-btn" id="createButton" value="Se Connecter"  update=":ConnexionForm" oncomplete="PF('ConnexionDialog').show()"/>
+
+                    <nav class="main-menu">
+                        <ul class="menu-list">
+                            <li><a href="#{request.contextPath}/faces/index.xhtml">Acceuil</a></li>
+                            <li><a href="#">Outils</a></li>
+                            <li><a href="#">Manuel</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            
+        </header>
+            </h:form>
+
+        <!-- Header section end -->
+
+        <!-- Hero section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 hero-text">
+                        <h2>Plannifiez votre  <span>Semaine</span></h2>
+                        <h4>Avec OAPET la planification devient un jeu d'enfants</h4>
+                        <form class="hero-subscribe-from">
+                            <button class="site-btn sb-gradients">Emploi de temps </button>
+                            <a href="nouveau.xhtml" class="site-btn sb-gradients sbg-line mt-5">S'enregistrer</a>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+
+
+
+                        <div id="demo" class="carousel slide" data-ride="carousel">
+
+                            <!-- Indicators -->
+                            <ul class="carousel-indicators">
+                                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                <li data-target="#demo" data-slide-to="1"></li>
+                                <li data-target="#demo" data-slide-to="2"></li>
+                                <li data-target="#demo" data-slide-to="3"></li>
+                                <li data-target="#demo" data-slide-to="4"></li>
+                            </ul>
+
+                            <!-- The slideshow -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="resources/img/acceuil3.jpeg" alt="Los Angeles" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/img/acceuil4.jpg" alt="Chicago" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/img/acceuil1.jpg" alt="New York" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/img/acceuil.png" alt="New York" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/img/Emploi.jpg" alt="New York" />
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#demo" data-slide="next">
+                                <span class="carousel-control-next-icon-red"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <ui:include src="outil/connexion.xhtml"/>
+        
+        <!--====== Javascripts & Jquery ======-->
+        <script src="resources/js/main.js"></script>
+
+        
+    </h:body>
+</html>
+

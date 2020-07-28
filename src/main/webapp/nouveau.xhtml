@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:head>
+        <title>Enregistrement</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="#{request.contextPath}/resources/login_items/images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/bootstrap/css/bootstrap.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/animate/animate.css"/>
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/css-hamburgers/hamburgers.min.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/animsition/css/animsition.min.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/select2/select2.min.css" />
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/vendor/daterangepicker/daterangepicker.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/css/util.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/login_items/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css" />
+    </h:head>
+    <h:body >
+
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url(#{request.contextPath}/resources/login_items/images/hero-bg.png)">
+                <div class="wrap-login100 p-t-30 p-b-50">
+                    <div class="login100-form-title p-b-41" align="center" >
+                        Nouveau Compte
+                    </div>
+                    <h:form class="login100-form validate-form p-b-33 p-t-5">
+                        <div class="wrap-input100 validate-input" data-validate = "Enter email">
+                            <h:inputText id="email" pt:placeholder="Email" class="input100" required="true" requiredMessage="email is requered!"/>
+                            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+
+                        </div>
+                        <h:message id="emailMessage" for="email" errorClass="erreur" style="align-content: center"/>
+                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                            <h:inputText id="username" pt:placeholder="Username" class="input100" required="true" requiredMessage="username is requered!"/>
+                            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+
+                        </div>
+                        <h:message id="usernameMessage" for="username" errorClass="erreur" />
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <h:inputSecret id="password" pt:placeholder="Password" class="input100" required="true" requiredMessage="password is requered!"/>
+                            <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+
+                        </div>
+                        <h:message id="passwordMessage" for="password" errorClass="erreur" />
+                        <div class="container-login100-form-btn m-t-32">
+                            <h:messages globalOnly="true" infoClass="info" />
+                            <h:commandButton value="Inscription"  class="login100-form-btn"/>
+
+                        </div><br/>
+                        <div align="justify">        
+
+                            <div class="col-lg-4">
+                                <div align="left">
+                                    <a href="#"><img src="resources/login_items/images/icons/favicon.ico" width="20px"/><u>Acceuil </u> </a><br/> 
+                                </div>
+                            </div>
+                            <div class="col-lg-8" >
+                                <div   align="right">
+                                    <a href="" ><u>Se Connecter </u> </a><br/>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </h:form>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!--===============================================================================================-->
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
+    </h:body>
+</html>
+

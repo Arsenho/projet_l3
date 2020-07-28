@@ -1,0 +1,465 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
+
+        <style type="text/css">
+            .ligne{
+                background-color: #99BBB0 ! important";
+                    }
+
+
+                    .value {
+                    font-weight: bold;
+                    }
+
+                    .ui-carousel {
+                    margin-bottom: 20px;
+                    }
+                </style>
+            </h:head>
+            <h:body >
+                <div class="row">
+
+            <div class="col-lg-12">
+                <h:form>  
+                    <p:growl id="messages"/>
+
+                    <p:menubar styleClass="ui-menubar"  >
+                        <p:menuitem value="Accueil" url="#{request.contextPath}/faces/admin/index.xhtml" icon="ui-icon-home" style="background-color: #99BBB0 ! important"/>
+                        <p:submenu label="Fichier" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Nouvelle production" url="edt_manuel.xhtml" icon="pi pi-briefcase"   styleClass="submenu" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Generation automatique d'un emploi de temps" actionListener="#{contraintegenautoController.prepareCreate}" update=":genautoCreateForm" oncomplete="PF('genautoCreateDialog').show()" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;"/>
+                            <p:submenu label="Ajout" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Programme de cours" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Nouvel Utilisateur" url="nouvel_utilisateur.xhtml" style="background-color: #ADD8E6 ! important;" />
+                            </p:submenu>
+                        </p:submenu>
+                        <p:submenu label="Outils" styleClass="submenu" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:submenu label="Tableaux de bord" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Filières" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Cours" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Enseignants" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            </p:submenu>
+                            <p:menuitem value="Emploi de temps récent" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            <p:submenu label="Configurations" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Systeme" url="#{request.contextPath}/faces/admin/configuration_systeme.xhtml" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Contrainte Gen Auto" url="#" style="background-color: #4588CF ! important"/>
+                                <p:menuitem value="Contraintes Horaires" url="#{request.contextPath}/faces/admin/configuration_horaire.xhtml" style="background-color: #ADD8E6 ! important;"/>
+                            </p:submenu>
+                        </p:submenu>
+                        <p:submenu label="Editer"  styleClass="submenu" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Supprimer Emploi de temps" url="#" icon="ui-icon-contactus" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Modifier emploi de temps" url="#" icon="pi pi-angle-double-right" style="background-color: #ADD8E6 ! important;" />
+                        </p:submenu>
+                        <p:submenu label="Maintenaces" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Liste Charge de production" url="chargeproduction/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Charge de Suivi" url="chargesuivi/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Contraintes Gen Auto" url="contraintegenauto/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Contraintes Horaires" url="contraintehoraire/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des cours" url="cours/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Listes Des Emplois De Temps" url="emploitemps/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Enseignats" url="enseignant/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Filieres" url="filiere/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Listes Des Groupes" url="groupe/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Notifications" url="notification/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Periodes" url="periode/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des utilisateurs" url="utilisateur/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Disponibilités" url="disponibiliteenseignant/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des programmes de cours" url="programmecours/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Aide" icon="pi pi-question" styleClass="submenu"  style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Documentation" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Developpeurs" url="#" style="background-color: #ADD8E6 ! important;"/>
+                        </p:submenu>
+                      
+                        <f:facet name="options">
+                            <p:inputText style="margin:1px 4px 1px 1px;" placeholder="Rechercher..."/>
+                            <p:commandButton type="button" value="ok"  />
+                            <p:submenu label="Compte" icon="ui ui-briefcase" styleClass="submenu">
+                                <p:menuitem value="modifier" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="quitter" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Chargé du suivit" url="#" style="background-color: #ADD8E6 ! important;" />
+                            </p:submenu>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <h:form>     
+                <p:growl id="messages" showDetail="true" />
+
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton type="button" value="Dossier" icon="ui-icon-folder-open" />
+
+                        <p:commandButton type="button" value="Print" icon="ui-icon-print" />
+
+                        <span class="ui-separator">
+                            <span class="ui-icon pi pi-ellipsis-v" />
+                        </span>
+
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:menuButton value="Compte">
+                            <p:menuitem value="Supprimer" action="#{toolbarView.save}" update="messages" icon="pi pi-save" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="parametrer" action="#{toolbarView.update}" update="messages" icon="pi pi-refresh" style="background-color: #ADD8E6 ! important;" />
+                            <p:menuitem value="Modifier" action="#{toolbarView.delete}" ajax="false" icon="pi pi-times" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Déconnecter" action="#{logoutBean.logout}"  icon="pi pi-home" style="background-color: #ADD8E6 ! important;" />
+                        </p:menuButton>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>          
+            <i class="pi pi-check"></i>
+        </div>
+                <div class="container">
+                    <div class="col-lg-9">
+
+                        <h:form id="form">
+                            <p:growl id="messages"/>
+                            <p:dataTable value="#{etController.listeEnregistrement}" 
+                                         var="lignes" editable="true"  
+                                         style="background-color: #4588CF ! important;margin-top:50px;"
+                                         editMode="cell"
+                                         widgetVar="table"
+                                         id="ma">
+                                <f:facet name="header">
+                                    <div align="center"> 
+                                        <p:outputPanel>
+                                            <p:outputLabel value="Filière et Niveau :" for="filiere" style="width:20%"/>
+                                            <p:selectOneMenu id="filiere" value="#{coursController.selected.idFiliere}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idFiliere}" converter="filiereConverter" style="width:35%">
+                                                <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                                               var="idFiliereItem"
+                                                               itemValue="#{idFiliereItem}"
+                                                               itemLabel="#{idFiliereItem.codeFiliere} #{idFiliereItem.niveauFiliere}"/>
+                                            </p:selectOneMenu>
+
+                                        </p:outputPanel><br/>
+                                    </div>
+
+                                    <div align="right">      
+                                        <p:outputPanel>
+                                            <h:outputText value="Rechercher :" />
+                                            <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px" placeholder="Mot clé"/>
+                                        </p:outputPanel>
+                                    </div>
+                                </f:facet>
+                                <p:ajax event="cellEdit" listener="#{etController.onCellEdit}"  />
+
+                                <p:column headerText="Periodes" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.periode}">
+                                                <f:convertDateTime pattern="HH:mm:ss" />
+                                            </h:outputText>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{lignes.periode}" style="width:96%" label="Year"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="lundi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.lundi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.lundi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.lundi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.lundi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.lundi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+
+                                            <h:selectOneRadio value="#{lignes.lundi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="mardi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.mardi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.mardi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.mardi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.mardi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.mardi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+                                            <h:selectOneRadio value="#{lignes.mardi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="mercredi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.mercredi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.mercredi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.mercredi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.mercredi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.mercredi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+                                            <h:selectOneRadio value="#{lignes.mercredi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="jeudi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.jeudi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.jeudi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.jeudi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.jeudi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.jeudi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+                                            <h:selectOneRadio value="#{lignes.jeudi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="vendredi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.vendredi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.vendredi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.vendredi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.vendredi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.vendredi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+                                            <h:selectOneRadio value="#{lignes.vendredi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="samedi" width="85">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{lignes.samedi.codeCours.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.samedi.codeCours}"/><br/>
+                                            <h:outputText value="#{lignes.samedi.typeCours}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{lignes.samedi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{disponibiliteenseignantController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours.codeCours}"/>
+                                            </h:selectOneMenu><br/>
+                                            <h:selectOneMenu  value="#{lignes.samedi.codeCours}"  class="form-control" converter="coursConverter">
+                                                <f:selectItems value="#{coursController.items}"
+                                                               var="coursItem"
+                                                               itemValue="#{coursItem}"
+                                                               itemLabel="#{coursItem.codeCours}"/>
+                                            </h:selectOneMenu><br/> 
+                                            <h:selectOneRadio value="#{lignes.samedi.typeCours}"  style="width:105px">
+                                                <f:selectItem itemValue="CM" itemLabel="CM" />
+                                                <f:selectItem itemValue="TD" itemLabel="TD"/>
+                                                <f:selectItem itemValue="TP" itemLabel="TP"/>
+
+                                            </h:selectOneRadio>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                            </p:dataTable>
+                            <p:contextMenu for="ma" widgetVar="cMenu">   
+                                <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('table').showCellEditor();return false;"/>  
+                                <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+                            </p:contextMenu> 
+                    
+                        <div class="col-lg-8">
+                            <div align="center">
+                                <h:commandButton  value="Sauvegarder" class="btn btn-lg btn-danger"/>
+                                <h:commandButton  value="Reinitialiser" class="btn btn-lg btn-success"/>
+
+                            </div>
+                        </div>
+             
+
+                        </h:form>
+                    </div>
+                    <div class="col-lg-3" style="margin-top:50px;">
+
+                        <h:form>
+                            <table class="table table-bordered" cellspacing="0">
+                                <thead class="thead" style="background-color: #99BBB0">
+                                    <tr>
+                                        <th scope="col" ><div align="center">Tableau De Bord</div></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td>
+                                            <div align="center">
+                                                <span><h:inputText value="#{liste.nom}"  /> <p:commandButton  icon="ui-icon-search"/></span>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <th>  
+
+                                            <div align="center">
+                                                <h:form>
+                                                    <p:carousel value="#{coursController.items}" headerText="Dr Tchoupé" var="liste" itemStyle="height:300px;text-align:center;width:100%" numVisible="1" easing="easeOutBounce" style="width:250px" circular="true">
+                                                        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value"  cellpadding="20" cellspacing="30">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Filiere : " style="color:Black"/>
+                                                                <h:outputText value="#{liste.idFiliere.instituleFiliere}" style="color:Black;align:center;"/>
+                                                            </f:facet>
+
+                                                            <h:outputText value="Niveau :" style="color:Black"/>
+                                                            <h:outputText value="#{liste.idFiliere.niveauFiliere}" />
+
+                                                            <h:outputText value="Intitule :" style="color:Black" />
+                                                            <h:outputText value="#{liste.instituleCours}" />
+
+                                                            <h:outputText value="CM :" style="color:Black"/>
+                                                            <p:progressBar value="30" labelTemplate="{value}%" displayOnly="true"/>
+
+                                                            <h:outputText value="TD :" style="color:Black"/>
+                                                            <p:progressBar value="50" labelTemplate="{value}%" displayOnly="true"/>
+
+                                                            <h:outputText value="TP :" style="color:Black"/>
+                                                            <p:progressBar value="40" labelTemplate="{value}%" displayOnly="true"/>
+
+                                                            <f:facet name="footer">
+                                                                <p:commandButton  icon="ui-icon-search">
+                                                                    <f:setPropertyActionListener value="#{liste}" target="#{utilisateurControlleur.selectedValue}" />
+                                                                </p:commandButton>
+                                                            </f:facet>
+                                                        </h:panelGrid>
+                                                    </p:carousel> 
+                                                </h:form>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>@informations generales</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </h:form>
+                    </div>
+                    
+                </div><br/><br/><br/><br/>
+                
+                <h:form>
+                    <p:carousel value="#{coursController.items}" headerText="Enseignements" var="liste" itemStyle="text-align:center" responsive="true">
+                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+                            <f:facet name="header">
+                                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+                            </f:facet>
+
+                            <h:outputText value="Intitulé:" style="color:Black"/>
+                            <h:outputText value="#{liste.instituleCours}" />
+
+                            <h:outputText value="TD" style="color:Black" />
+                            <p:progressBar value="#{liste.nbreHeureTd}" labelTemplate="{value}%" displayOnly="true"/>
+                            
+                            <h:outputText value="TP:" style="color:Black" />
+                            <p:progressBar value="#{liste.nbreHeureTp}" labelTemplate="{value}%" displayOnly="true"/>
+                           
+                            <h:outputText value="CM:" style="color:Black" />
+                            <p:progressBar value="#{liste.nbreHeureCm}" labelTemplate="{value}%" displayOnly="true"/>
+                        </p:panelGrid>
+
+                        <f:facet name="footer">
+                            In total there are 
+                        </f:facet>
+                    </p:carousel>
+                </h:form>
+                <h:form>
+                    
+                    <div class="col-lg-4"><img src="#{request.contextPath}/resources/img/téléchargement.jfif"/></div>
+                </h:form>
+            </h:body>
+            <ui:include src="contraintegenauto.xhtml"/>
+        </html>
+

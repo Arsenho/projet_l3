@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmploitempsEditDlg" widgetVar="EmploitempsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEmploitempsTitle}">
+            <h:form id="EmploitempsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{emploitempsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_idEmploiTemps}" for="idEmploiTemps" />
+                        <p:inputText id="idEmploiTemps" value="#{emploitempsController.selected.idEmploiTemps}" title="#{bundle.EditEmploitempsTitle_idEmploiTemps}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_idEmploiTemps}"/>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_dateDebut}" for="dateDebut" />
+                        <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{emploitempsController.selected.dateDebut}" title="#{bundle.EditEmploitempsTitle_dateDebut}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_dateDebut}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_dateFin}" for="dateFin" />
+                        <p:calendar id="dateFin" pattern="MM/dd/yyyy" value="#{emploitempsController.selected.dateFin}" title="#{bundle.EditEmploitempsTitle_dateFin}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_dateFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_dateCreation}" for="dateCreation" />
+                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy HH:mm:ss" value="#{emploitempsController.selected.dateCreation}" title="#{bundle.EditEmploitempsTitle_dateCreation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_dateValidation}" for="dateValidation" />
+                        <p:calendar id="dateValidation" pattern="MM/dd/yyyy HH:mm:ss" value="#{emploitempsController.selected.dateValidation}" title="#{bundle.EditEmploitempsTitle_dateValidation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_idChargeProduction}" for="idChargeProduction" />
+                        <p:selectOneMenu id="idChargeProduction" value="#{emploitempsController.selected.idChargeProduction}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_idChargeProduction}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionItem"
+                                           itemValue="#{idChargeProductionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_idChargeSuivi}" for="idChargeSuivi" />
+                        <p:selectOneMenu id="idChargeSuivi" value="#{emploitempsController.selected.idChargeSuivi}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_idChargeSuivi}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargesuiviController.itemsAvailableSelectOne}"
+                                           var="idChargeSuiviItem"
+                                           itemValue="#{idChargeSuiviItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEmploitempsLabel_idContrainteHoraire}" for="idContrainteHoraire" />
+                        <p:selectOneMenu id="idContrainteHoraire" value="#{emploitempsController.selected.idContrainteHoraire}" required="true" requiredMessage="#{bundle.EditEmploitempsRequiredMessage_idContrainteHoraire}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{contraintehoraireController.itemsAvailableSelectOne}"
+                                           var="idContrainteHoraireItem"
+                                           itemValue="#{idContrainteHoraireItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{emploitempsController.update}" value="#{bundle.Save}" update="display,:EmploitempsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmploitempsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmploitempsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

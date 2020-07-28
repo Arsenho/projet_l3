@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContraintehoraireViewDlg" widgetVar="ContraintehoraireViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewContraintehoraireTitle}">
+            <h:form id="ContraintehoraireViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contraintehoraireController.selected != null}">
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_idContrainteHoraire}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.idContrainteHoraire}" title="#{bundle.ViewContraintehoraireTitle_idContrainteHoraire}"/>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_heureDebutCours}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.heureDebutCours}" title="#{bundle.ViewContraintehoraireTitle_heureDebutCours}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_heureFinCours}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.heureFinCours}" title="#{bundle.ViewContraintehoraireTitle_heureFinCours}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_dureePeriode}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.dureePeriode}" title="#{bundle.ViewContraintehoraireTitle_dureePeriode}"/>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_heureDebutPause}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.heureDebutPause}" title="#{bundle.ViewContraintehoraireTitle_heureDebutPause}"/>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_dureePause}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.dureePause}" title="#{bundle.ViewContraintehoraireTitle_dureePause}"/>
+                        <h:outputText value="#{bundle.ViewContraintehoraireLabel_idChargeProduction}"/>
+                        <h:outputText value="#{contraintehoraireController.selected.idChargeProduction}" title="#{bundle.ViewContraintehoraireTitle_idChargeProduction}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ContraintehoraireViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

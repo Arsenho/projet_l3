@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContraintehoraireCreateDlg" widgetVar="ContraintehoraireCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateContraintehoraireTitle}">
+            <h:form id="ContraintehoraireCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contraintehoraireController.selected != null}">
+                       
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_heureDebutCours}" for="heureDebutCours" />
+                        <p:calendar id="heureDebutCours" pattern="HH:mm:ss" value="#{contraintehoraireController.selected.heureDebutCours}" title="#{bundle.EditContraintehoraireTitle_heureDebutCours}" required="true" requiredMessage="#{bundle.EditContraintehoraireRequiredMessage_heureDebutCours}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_heureFinCours}" for="heureFinCours" />
+                        <p:calendar id="heureFinCours" pattern="HH:mm:ss" value="#{contraintehoraireController.selected.heureFinCours}" title="#{bundle.EditContraintehoraireTitle_heureFinCours}" required="true" requiredMessage="#{bundle.EditContraintehoraireRequiredMessage_heureFinCours}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_dureePeriode}" for="dureePeriode" />
+                        <p:inputText id="dureePeriode" value="#{contraintehoraireController.selected.dureePeriode}" title="#{bundle.CreateContraintehoraireTitle_dureePeriode}" />
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_heureDebutPause}" for="heureDebutPause" />
+                        <p:calendar id="heureDebutPause" pattern="HH:mm:ss" value="#{contraintehoraireController.selected.heureDebutPause}" title="#{bundle.CreateContraintehoraireTitle_heureDebutPause}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_dureePause}" for="dureePause" />
+                        <p:inputText id="dureePause" value="#{contraintehoraireController.selected.dureePause}" title="#{bundle.CreateContraintehoraireTitle_dureePause}" />
+                        <p:outputLabel value="#{bundle.CreateContraintehoraireLabel_idChargeProduction}" for="idChargeProduction" />
+                        <p:selectOneMenu id="idChargeProduction" value="#{contraintehoraireController.selected.idChargeProduction}" required="true" requiredMessage="#{bundle.EditContraintehoraireRequiredMessage_idChargeProduction}" converter="chargeproductionConverter">
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionItem"
+                                           itemValue="#{idChargeProductionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contraintehoraireController.create}" value="#{bundle.Save}" update="display,:ContraintehoraireListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContraintehoraireCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ContraintehoraireCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

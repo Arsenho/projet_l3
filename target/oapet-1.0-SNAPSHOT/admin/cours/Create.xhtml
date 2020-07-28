@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CoursCreateDlg" widgetVar="CoursCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCoursTitle}">
+            <h:form id="CoursCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{coursController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_codeCours}" for="codeCours" />
+                        <p:inputText id="codeCours" value="#{coursController.selected.codeCours}" title="#{bundle.CreateCoursTitle_codeCours}" required="true" requiredMessage="#{bundle.CreateCoursRequiredMessage_codeCours}"/>
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_instituleCours}" for="instituleCours" />
+                        <p:inputText id="instituleCours" value="#{coursController.selected.instituleCours}" title="#{bundle.CreateCoursTitle_instituleCours}" required="true" requiredMessage="#{bundle.CreateCoursRequiredMessage_instituleCours}"/>
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_nbreHeureCm}" for="nbreHeureCm" />
+                        <p:inputText id="nbreHeureCm" value="#{coursController.selected.nbreHeureCm}" title="#{bundle.CreateCoursTitle_nbreHeureCm}" required="true" requiredMessage="#{bundle.CreateCoursRequiredMessage_nbreHeureCm}"/>
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_nbreHeureTd}" for="nbreHeureTd" />
+                        <p:inputText id="nbreHeureTd" value="#{coursController.selected.nbreHeureTd}" title="#{bundle.CreateCoursTitle_nbreHeureTd}" required="true" requiredMessage="#{bundle.CreateCoursRequiredMessage_nbreHeureTd}"/>
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_nbreHeureTp}" for="nbreHeureTp" />
+                        <p:inputText id="nbreHeureTp" value="#{coursController.selected.nbreHeureTp}" title="#{bundle.CreateCoursTitle_nbreHeureTp}" required="true" requiredMessage="#{bundle.CreateCoursRequiredMessage_nbreHeureTp}"/>
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_idChargeProduction}" for="idChargeProduction" />
+                        <p:selectOneMenu id="idChargeProduction" value="#{coursController.selected.idChargeProduction}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idChargeProduction}" converter="chargeproductionConverter">
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionItem"
+                                           itemValue="#{idChargeProductionItem}"/>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="#{bundle.CreateCoursLabel_idFiliere}" for="idFiliere" />
+                        <p:selectOneMenu id="idFiliere" value="#{coursController.selected.idFiliere}" required="true" requiredMessage="#{bundle.EditCoursRequiredMessage_idFiliere}" converter="filiereConverter">
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="idFiliereItem"
+                                           itemValue="#{idFiliereItem}"
+                                           itemLabel="#{idFiliereItem.instituleFiliere} #{idFiliereItem.niveauFiliere}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{coursController.create}" value="#{bundle.Save}" update="display,:CoursListForm:datalist,:growl" oncomplete="handleSubmit(args,'CoursCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CoursCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

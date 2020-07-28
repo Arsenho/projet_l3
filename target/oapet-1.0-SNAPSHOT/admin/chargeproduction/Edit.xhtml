@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargeproductionEditDlg" widgetVar="ChargeproductionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditChargeproductionTitle}">
+            <h:form id="ChargeproductionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargeproductionController.selected != null}">
+                       
+                        
+                        <p:outputLabel value="#{bundle.EditChargeproductionLabel_dateModofication}" for="dateModofication" />
+                        <p:calendar id="dateModofication" pattern="MM/dd/yyyy HH:mm:ss" value="#{chargeproductionController.selected.dateModofication}" title="#{bundle.EditChargeproductionTitle_dateModofication}"  showOn="button"/>
+                        
+                        <p:outputLabel value="#{bundle.EditChargeproductionLabel_idChargeProductionPeutEtreM}" for="idChargeProductionPeutEtreM" />
+                        <p:selectOneMenu id="idChargeProductionPeutEtreM" value="#{chargeproductionController.selected.idChargeProductionPeutEtreM}" converter="chargeproductionConverter">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionPeutEtreMItem"
+                                           itemValue="#{idChargeProductionPeutEtreMItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditChargeproductionLabel_email}" for="email" />
+                        <p:selectOneMenu id="email" value="#{chargeproductionController.selected.email}" required="true" requiredMessage="#{bundle.EditChargeproductionRequiredMessage_email}" converter="utilisateurConverter">
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="emailItem"
+                                           itemValue="#{emailItem}"
+                                           itemLabel="#{emailItem.email}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chargeproductionController.update}" value="#{bundle.Save}" update="display,:ChargeproductionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChargeproductionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChargeproductionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

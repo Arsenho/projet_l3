@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContraintegenautoViewDlg" widgetVar="ContraintegenautoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewContraintegenautoTitle}">
+            <h:form id="ContraintegenautoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contraintegenautoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_idContainteGenAuto}"/>
+                        <h:outputText value="#{contraintegenautoController.selected.idContainteGenAuto}" title="#{bundle.ViewContraintegenautoTitle_idContainteGenAuto}"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_prioriteFifo}"/>
+                        <p:selectBooleanCheckbox value="#{contraintegenautoController.selected.prioriteFifo}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_prioriteRetardCm}"/>
+                        <p:selectBooleanCheckbox value="#{contraintegenautoController.selected.prioriteRetardCm}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_prioriteRetardtTd}"/>
+                        <p:selectBooleanCheckbox value="#{contraintegenautoController.selected.prioriteRetardtTd}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_prioriteRetardTp}"/>
+                        <p:selectBooleanCheckbox value="#{contraintegenautoController.selected.prioriteRetardTp}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_idChargeProduction}"/>
+                        <h:outputText value="#{contraintegenautoController.selected.idChargeProduction}" title="#{bundle.ViewContraintegenautoTitle_idChargeProduction}"/>
+                        <h:outputText value="#{bundle.ViewContraintegenautoLabel_idEmploiTemps}"/>
+                        <h:outputText value="#{contraintegenautoController.selected.idEmploiTemps}" title="#{bundle.ViewContraintegenautoTitle_idEmploiTemps}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ContraintegenautoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargesuiviEditDlg" widgetVar="ChargesuiviEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditChargesuiviTitle}">
+            <h:form id="ChargesuiviEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargesuiviController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.EditChargesuiviLabel_nature}" for="nature" />
+                        <p:inputText id="nature" value="#{chargesuiviController.selected.nature}" title="#{bundle.EditChargesuiviTitle_nature}" />
+                        
+                        <p:outputLabel value="#{bundle.EditChargesuiviLabel_dateModification}" for="dateModification" />
+                        <p:calendar id="dateModification" pattern="MM/dd/yyyy HH:mm:ss" value="#{chargesuiviController.selected.dateModification}" title="#{bundle.EditChargesuiviTitle_dateModification}" required="true" requiredMessage="#{bundle.EditChargesuiviRequiredMessage_dateModification}" showOn="button"/>
+                        
+                        <p:outputLabel value="#{bundle.EditChargesuiviLabel_idChargeProductionPeutEtreM}" for="idChargeProductionPeutEtreM" />
+                        <p:selectOneMenu id="idChargeProductionPeutEtreM" value="#{chargesuiviController.selected.idChargeProductionPeutEtreM}" converter="chargeproductionConverter">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chargeproductionController.itemsAvailableSelectOne}"
+                                           var="idChargeProductionPeutEtreMItem"
+                                           itemValue="#{idChargeProductionPeutEtreMItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditChargesuiviLabel_idFiliere}" for="idFiliere" />
+                        <p:selectOneMenu id="idFiliere" value="#{chargesuiviController.selected.idFiliere}" required="true" requiredMessage="#{bundle.EditChargesuiviRequiredMessage_idFiliere}" converter="filiereConverter">
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="idFiliereItem"
+                                           itemValue="#{idFiliereItem}"
+                                           itemLabel="#{idFiliereItem.instituleFiliere} #{idFiliereItem.niveauFiliere}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditChargesuiviLabel_email}" for="email" />
+                        <p:selectOneMenu id="email" value="#{chargesuiviController.selected.email}" required="true" requiredMessage="#{bundle.EditChargesuiviRequiredMessage_email}" converter="utilisateurConverter">
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="emailItem"
+                                           itemValue="#{emailItem}"
+                                           itemLabel="#{emailItem.email}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chargesuiviController.update}" value="#{bundle.Save}" update="display,:ChargesuiviListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChargesuiviEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChargesuiviEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

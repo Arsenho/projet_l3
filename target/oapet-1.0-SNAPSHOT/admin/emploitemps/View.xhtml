@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmploitempsViewDlg" widgetVar="EmploitempsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEmploitempsTitle}">
+            <h:form id="EmploitempsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{emploitempsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_idEmploiTemps}"/>
+                        <h:outputText value="#{emploitempsController.selected.idEmploiTemps}" title="#{bundle.ViewEmploitempsTitle_idEmploiTemps}"/>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_dateDebut}"/>
+                        <h:outputText value="#{emploitempsController.selected.dateDebut}" title="#{bundle.ViewEmploitempsTitle_dateDebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_dateFin}"/>
+                        <h:outputText value="#{emploitempsController.selected.dateFin}" title="#{bundle.ViewEmploitempsTitle_dateFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_dateCreation}"/>
+                        <h:outputText value="#{emploitempsController.selected.dateCreation}" title="#{bundle.ViewEmploitempsTitle_dateCreation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_dateValidation}"/>
+                        <h:outputText value="#{emploitempsController.selected.dateValidation}" title="#{bundle.ViewEmploitempsTitle_dateValidation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_idChargeProduction}"/>
+                        <h:outputText value="#{emploitempsController.selected.idChargeProduction}" title="#{bundle.ViewEmploitempsTitle_idChargeProduction}"/>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_idChargeSuivi}"/>
+                        <h:outputText value="#{emploitempsController.selected.idChargeSuivi}" title="#{bundle.ViewEmploitempsTitle_idChargeSuivi}"/>
+                        <h:outputText value="#{bundle.ViewEmploitempsLabel_idContrainteHoraire}"/>
+                        <h:outputText value="#{emploitempsController.selected.idContrainteHoraire}" title="#{bundle.ViewEmploitempsTitle_idContrainteHoraire}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EmploitempsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

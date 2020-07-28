@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>configuration horaire</title>
+        <!--<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>-->
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+        <style type="text/css">
+            .ui-menubar	{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            .ui-submenu{mouseover: #ff0000; background-color: #118ea4 !important; background: blue;}
+            submenu {background-color: #118ea4 !important;}
+            .ajouter {
+                background-image: url('resources/img/dossier.png') !important;
+            }
+        </style>
+
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Raleway" rel="stylesheet"/>
+        <!--<link rel="stylesheet" href="#{request.contextPath}/resources/css/flexslider.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/font-awesome.min.css"/>-->
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+    </h:head>
+    <h:body style="background-image: url(#{request.contextPath}/resources/img/hero-bg.png)" >
+      <div class="row">
+
+            <div class="col-lg-12">
+                <h:form>  
+                    <p:growl id="messages"/>
+
+                    <p:menubar styleClass="ui-menubar"  >
+                        <p:menuitem value="Accueil" url="#{request.contextPath}/faces/admin/index.xhtml" icon="ui-icon-home" style="background-color: #99BBB0 ! important"/>
+                        <p:submenu label="Fichier" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Nouvelle production" url="edt_manuel.xhtml" icon="pi pi-briefcase"   styleClass="submenu" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Generation automatique d'un emploi de temps" actionListener="#{contraintegenautoController.prepareCreate}" update=":genautoCreateForm" oncomplete="PF('genautoCreateDialog').show()" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;"/>
+                            <p:submenu label="Ajout" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Programme de cours" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Nouvel Utilisateur" url="nouvel_utilisateur.xhtml" style="background-color: #ADD8E6 ! important;" />
+                            </p:submenu>
+                        </p:submenu>
+                        <p:submenu label="Outils" styleClass="submenu" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:submenu label="Tableaux de bord" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Filières" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Cours" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Enseignants" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            </p:submenu>
+                            <p:menuitem value="Emploi de temps récent" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            <p:submenu label="Configurations" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #ADD8E6 ! important;">
+                                <p:menuitem value="Systeme" url="#{request.contextPath}/faces/admin/configuration_systeme.xhtml" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Contrainte Gen Auto" url="#" style="background-color: #4588CF ! important"/>
+                                <p:menuitem value="Contraintes Horaires" url="#{request.contextPath}/faces/admin/configuration_horaire.xhtml" style="background-color: #ADD8E6 ! important;"/>
+                            </p:submenu>
+                        </p:submenu>
+                        <p:submenu label="Editer"  styleClass="submenu" icon="pi pi-file" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Supprimer Emploi de temps" url="#" icon="ui-icon-contactus" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Modifier emploi de temps" url="#" icon="pi pi-angle-double-right" style="background-color: #ADD8E6 ! important;" />
+                        </p:submenu>
+                        <p:submenu label="Maintenaces" icon="pi pi-briefcase" styleClass="submenu" style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Liste Charge de production" url="chargeproduction/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Charge de Suivi" url="chargesuivi/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Contraintes Gen Auto" url="contraintegenauto/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Contraintes Horaires" url="contraintehoraire/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des cours" url="cours/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Listes Des Emplois De Temps" url="emploitemps/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Enseignats" url="enseignant/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Filieres" url="filiere/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Listes Des Groupes" url="groupe/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Notifications" url="notification/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Periodes" url="periode/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des utilisateurs" url="utilisateur/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des Disponibilités" url="disponibiliteenseignant/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                            <p:menuitem value="Liste Des programmes de cours" url="programmecours/List.xhtml" style="background-color: #ADD8E6 ! important"/>
+                        </p:submenu>
+                        <p:submenu label="Aide" icon="pi pi-question" styleClass="submenu"  style="background-color: #99BBB0 ! important">
+                            <p:menuitem value="Documentation" url="#" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Developpeurs" url="#" style="background-color: #ADD8E6 ! important;"/>
+                        </p:submenu>
+                      
+                        <f:facet name="options">
+                            <p:inputText style="margin:1px 4px 1px 1px;" placeholder="Rechercher..."/>
+                            <p:commandButton type="button" value="ok"  />
+                            <p:submenu label="Compte" icon="ui ui-briefcase" styleClass="submenu">
+                                <p:menuitem value="modifier" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="quitter" url="#" style="background-color: #ADD8E6 ! important;"/>
+                                <p:menuitem value="Chargé du suivit" url="#" style="background-color: #ADD8E6 ! important;" />
+                            </p:submenu>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <h:form>     
+                <p:growl id="messages" showDetail="true" />
+
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton type="button" value="Dossier" icon="ui-icon-folder-open" />
+
+                        <p:commandButton type="button" value="Print" icon="ui-icon-print" />
+
+                        <span class="ui-separator">
+                            <span class="ui-icon pi pi-ellipsis-v" />
+                        </span>
+
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:menuButton value="Compte">
+                            <p:menuitem value="Supprimer" action="#{toolbarView.save}" update="messages" icon="pi pi-save" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="parametrer" action="#{toolbarView.update}" update="messages" icon="pi pi-refresh" style="background-color: #ADD8E6 ! important;" />
+                            <p:menuitem value="Modifier" action="#{toolbarView.delete}" ajax="false" icon="pi pi-times" style="background-color: #ADD8E6 ! important;"/>
+                            <p:menuitem value="Déconnecter" action="#{logoutBean.logout}"  icon="pi pi-home" style="background-color: #ADD8E6 ! important;" />
+                        </p:menuButton>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>          
+            <i class="pi pi-check"></i>
+        </div>
+       
+        <h:form id="formulaire1">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div align="center">
+                        <img src="#{request.contextPath}/resources/img/logo.jpg" width="300px"/><h2 align="center"><i>configuration Horaire</i></h2><br/><br/>
+
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <div id="div1">
+                <div id="div2" class="col-lg-6">  
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10">
+                        <fieldset  class="bloc2">
+                            <legend><i>contraintes horaire</i></legend> 
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:outputLabel value="Heure de debut des cours : " for="heureDebutCours"/>
+                                <p:inputText id="heureDebutCours"  required ="true" requiredMessage="la valeur de ce champ est mal renseignée!!!"  value=" "/>
+                                <p:message for="heureDebutCours" styleClass="errorBlock" />
+                            </h:panelGrid><br/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:outputLabel value="Heure de fin des cours : " for="heureFinCours"/>
+                                <p:inputText id="heureFinCours" required="true" requiredMessage="la valeur de ce champ est mal renseignée!!!" value=" "/>
+                                <p:message for="heureFinCours" styleClass="errorBlock" />
+                            </h:panelGrid><br/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:outputLabel value="Durée d'une période : " for="duréPériode"/>
+                                <p:inputText id="duréPériode"  required ="true" requiredMessage="la valeur de ce champ est mal renseignée!!!" value=" "/>
+                                <p:message for="duréPériode" styleClass="errorBlock" />
+                            </h:panelGrid><br/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:outputLabel value="Heure de la pause" for="heurePause"/>
+                                <p:inputText id="heurePause"  required ="true" requiredMessage="la valeur de ce champ est mal renseignée!!!" value=" "/>
+                                <p:message for="heurePause" styleClass="errorBlock" />
+                            </h:panelGrid><br/>
+                            <h:panelGrid columns="6" cellpadding="2">
+                                <p:outputLabel value="Jours de cours : " />
+                                <label for="debut"><b>  De :  </b></label> <p:selectOneMenu id="debut" required="true" requiredMessage="la valeur de ce champ est mal renseignée!!!" value="">
+                                    <f:selectItem  itemLabel="Lundi" itemValue="Lundi"/>
+                                    <f:selectItem  itemLabel="Mardi" itemValue="Mardi"/>
+                                    <f:selectItem  itemLabel="Mercredidi" itemValue="Mercredidi"/>
+                                    <f:selectItem  itemLabel="Jeudi" itemValue="Jeudi"/>
+                                    <f:selectItem  itemLabel="Vendredi" itemValue="Vendredidi"/>
+                                    <f:selectItem  itemLabel="Samedi" itemValue="Samedidi"/>
+                                    <f:selectItem  itemLabel="Dimanche" itemValue="Dimanche"/>
+                                </p:selectOneMenu>
+                                <p:message for="debut" styleClass="errorBlock" />
+                                <label for="debut"><b>   A : </b></label> <p:selectOneMenu id="Fin" required="true" requiredMessage="la valeur de ce champ est mal renseignée!!!" value="">
+                                    <f:selectItem  itemLabel="Lundi" itemValue="Lundi"/>
+                                    <f:selectItem  itemLabel="Mardi" itemValue="Mardi"/>
+                                    <f:selectItem  itemLabel="Mercredi" itemValue="Mercredidi"/>
+                                    <f:selectItem  itemLabel="Jeudi" itemValue="Jeudi"/>
+                                    <f:selectItem  itemLabel="Vendredi" itemValue="Vendredidi"/>
+                                    <f:selectItem  itemLabel="Samedi" itemValue="Samedidi"/>
+                                    <f:selectItem  itemLabel="Dimanche" itemValue="Dimanche"/>
+                                </p:selectOneMenu>
+                                <p:message for="Fin" styleClass="errorBlock" />
+                            </h:panelGrid><br/><br/><br/><br/>
+                        </fieldset>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-10">
+                        <fieldset class="bloc3">
+                                <legend><i>Contraintes horaires appliquées aux cours</i></legend> 
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Date de début des cours : " for="dateDebutCours"/>
+                                    <p:calendar id="dateDebutCours" pattern="dd.MM.yyyy" showOn="button" value="" mode="popup" />
+                                </h:panelGrid><br/>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Date d'arret des cours : " for="dateArretCours"/>
+                                    <p:calendar id="dateArretCours" pattern="dd.MM.yyyy" showOn="button" value="" mode="popup" />
+                                </h:panelGrid><br/>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Date de début des examens : " for="dateDebutExamens"/>
+                                    <p:calendar id="dateDebutExamens" pattern="dd.MM.yyyyl" showOn="button" value="" mode="popup" />
+                                </h:panelGrid><br/><br/>
+                            </fieldset>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </h:form>
+        <div class="col-lg-8">
+            <div align="right">
+                <button class="btn btn-lg btn-danger">Reinitialiser</button>
+                <button class="btn btn-lg btn-success">Sauvegarder</button>
+            </div>
+        </div>
+        <div class="col-lg-4"><img src="#{request.contextPath}/resources/img/téléchargement.jfif"/></div>
+    </h:body>
+
+    <ui:include src="contraintegenauto.xhtml"/>
+    <script src="#{request.contextPath}/resources/js/main.js"></script>
+</html>
+

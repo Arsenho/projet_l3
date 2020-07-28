@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodeViewDlg" widgetVar="PeriodeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPeriodeTitle}">
+            <h:form id="PeriodeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{periodeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_idPeriode}"/>
+                        <h:outputText value="#{periodeController.selected.idPeriode}" title="#{bundle.ViewPeriodeTitle_idPeriode}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_heureDebut}"/>
+                        <h:outputText value="#{periodeController.selected.heureDebut}" title="#{bundle.ViewPeriodeTitle_heureDebut}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_heureFin}"/>
+                        <h:outputText value="#{periodeController.selected.heureFin}" title="#{bundle.ViewPeriodeTitle_heureFin}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_typeCours}"/>
+                        <h:outputText value="#{periodeController.selected.typeCours}" title="#{bundle.ViewPeriodeTitle_typeCours}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_effectivite}"/>
+                        <p:selectBooleanCheckbox value="#{periodeController.selected.effectivite}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_codeCours}"/>
+                        <h:outputText value="#{periodeController.selected.codeCours}" title="#{bundle.ViewPeriodeTitle_codeCours}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeLabel_idEmploiTemps}"/>
+                        <h:outputText value="#{periodeController.selected.idEmploiTemps}" title="#{bundle.ViewPeriodeTitle_idEmploiTemps}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PeriodeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
